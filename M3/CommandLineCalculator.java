@@ -1,18 +1,15 @@
 package M3;
 
 /*
-Challenge 1: Command-Line Calculator
-------------------------------------
-- Accept two numbers and an operator as command-line arguments
-- Supports addition (+) and subtraction (-)
-- Allow integer and floating-point numbers
-- Ensures correct decimal places in output based on input (e.g., 0.1 + 0.2 → 1 decimal place)
-- Display an error for invalid inputs or unsupported operators
-- Capture 5 variations of tests
+UCID: st944
+Date: 09/30/2025
+Summary: CommandLineCalculator accepts two numbers and an operator (+ or -) 
+from the command-line, performs the calculation, and formats the result 
+to preserve the maximum number of decimal places from the inputs.
 */
 
 public class CommandLineCalculator extends BaseClass {
-    private static String ucid = "mt85"; // <-- change to your ucid
+    private static String ucid = "st944"; // <-- your UCID
 
     public static void main(String[] args) {
         printHeader(ucid, 1, "Objective: Implement a calculator using command-line arguments.");
@@ -25,21 +22,45 @@ public class CommandLineCalculator extends BaseClass {
 
         try {
             System.out.println("Calculating result...");
-            // extract the equation (format is <num1> <operator> <num2>)
 
-            // check if operator is addition or subtraction
+            String num1Str = args[0];
+            String operator = args[1];
+            String num2Str = args[2];
 
-            // check the type of each number and choose appropriate parsing
+            double num1 = Double.parseDouble(num1Str);
+            double num2 = Double.parseDouble(num2Str);
 
-            // generate the equation result (Important: ensure decimals display as the
-            // longest decimal passed)
-            // i.e., 0.1 + 0.2 would show as one decimal place (0.3), 0.11 + 0.2 would shows
-            // as two (0.31), etc
+            double result;
+            if (operator.equals("+")) {
+                result = num1 + num2;
+            } else if (operator.equals("-")) {
+                result = num1 - num2;
+            } else {
+                System.out.println("Error: Unsupported operator. Use + or - only.");
+                printFooter(ucid, 1);
+                return;
+            }
 
+            // Determine max decimal places from inputs
+            int decimals = Math.max(getDecimals(num1Str), getDecimals(num2Str));
+
+            // Print formatted result
+            System.out.printf("%." + decimals + "f%n", result);
+
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Invalid number format.");
         } catch (Exception e) {
             System.out.println("Invalid input. Please ensure correct format and valid numbers.");
         }
 
         printFooter(ucid, 1);
+    }
+
+    // Helper method: count decimal places in a string number
+    private static int getDecimals(String num) {
+        if (num.contains(".")) {
+            return num.length() - num.indexOf('.') - 1;
+        }
+        return 0;
     }
 }
