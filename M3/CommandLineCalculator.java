@@ -2,17 +2,20 @@ package M3;
 
 /*
 UCID: st944
-Date: 09/30/2025
-Summary: CommandLineCalculator accepts two numbers and an operator (+ or -) 
-from the command-line, performs the calculation, and formats the result 
-to preserve the maximum number of decimal places from the inputs.
+Date: 10/13/2025
+Summary: CommandLineCalculator accepts two numbers and an operator (+ or -)
+from the command line, performs the calculation, and prints the correctly
+formatted result using the maximum decimal precision found in the inputs.
 */
 
 public class CommandLineCalculator extends BaseClass {
-    private static String ucid = "st944"; // <-- your UCID
+    private static String ucid = "st944"; // <-- UCID variable updated
 
     public static void main(String[] args) {
         printHeader(ucid, 1, "Objective: Implement a calculator using command-line arguments.");
+
+        // --- Validate argument count ---
+        // UCID: st944 | Name: Sahith T. | Date: 09/29/2025
 
         if (args.length != 3) {
             System.out.println("Usage: java M3.CommandLineCalculator <num1> <operator> <num2>");
@@ -31,6 +34,8 @@ public class CommandLineCalculator extends BaseClass {
             double num2 = Double.parseDouble(num2Str);
 
             double result;
+
+            // --- Perform operation (+ or - only) ---
             if (operator.equals("+")) {
                 result = num1 + num2;
             } else if (operator.equals("-")) {
@@ -41,11 +46,11 @@ public class CommandLineCalculator extends BaseClass {
                 return;
             }
 
-            // Determine max decimal places from inputs
+            // --- Determine maximum decimal precision ---
             int decimals = Math.max(getDecimals(num1Str), getDecimals(num2Str));
 
-            // Print formatted result
-            System.out.printf("%." + decimals + "f%n", result);
+            // --- Display formatted result with matching precision ---
+            System.out.printf("%s %s %s = %." + decimals + "f%n", num1Str, operator, num2Str, result);
 
         } catch (NumberFormatException e) {
             System.out.println("Error: Invalid number format.");
@@ -56,7 +61,7 @@ public class CommandLineCalculator extends BaseClass {
         printFooter(ucid, 1);
     }
 
-    // Helper method: count decimal places in a string number
+    // Helper method: count decimal places in a numeric string
     private static int getDecimals(String num) {
         if (num.contains(".")) {
             return num.length() - num.indexOf('.') - 1;
