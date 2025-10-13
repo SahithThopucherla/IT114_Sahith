@@ -1,0 +1,2 @@
+Yesterday, <name> went to the <place> to buy a <noun>.
+It was a very <adjective> day.
