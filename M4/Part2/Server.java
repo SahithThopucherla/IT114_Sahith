@@ -6,51 +6,90 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Server supporting private messages (/pm)
+ * UCID: st944
+ * Date: 10/21/2025
+ */
 public class Server {
     private int port = 3000;
+
+    // UCID: st944 | Date: 10/21/2025
+    // Store connected clients using IDs
+    private ConcurrentHashMap<Integer, PrintWriter> clients = new ConcurrentHashMap<>();
+    private int nextId = 1;
 
     private void start(int port) {
         this.port = port;
         System.out.println("Listening on port " + this.port);
-        // server listening
-        try (ServerSocket serverSocket = new ServerSocket(port);
-                // client wait
-                Socket client = serverSocket.accept(); // blocking;
-                // send to client
-                PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-                // read from client
-                BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));) {
 
-            System.out.println("Client connected, waiting for message");
-            String fromClient = "";
-            while ((fromClient = in.readLine()) != null) {
-                System.out.println("From client: " + fromClient);
-                if ("/kill server".equalsIgnoreCase(fromClient)) {
-                    // normally you wouldn't have a remote kill command, this is just for example
-                    // sake
-                    System.out.println("Client killed server");
-                    break;
-                } else if (fromClient.startsWith("/reverse")) {
-                    // another example of server-side command
-                    // Note: In the future command format processing will be client-side
-                    // then client will send just the necessary data to the server so the server
-                    // doesn't need to do as much string processing
-                    StringBuilder sb = new StringBuilder(fromClient.replace("/reverse ", ""));
-                    sb.reverse();
-                    String rev = sb.toString();
-                    System.out.println("To client: " + rev);
-                    out.println(rev);
-                } else {
-                    System.out.println("To client: " + fromClient);
-                    out.println(fromClient);
-                }
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            System.out.println("Server ready. Waiting for clients...");
+            while (true) {
+                Socket client = serverSocket.accept();
+                int clientId = nextId++;
+                PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+                clients.put(clientId, out);
+                System.out.println("Client #" + clientId + " connected.");
+
+                // UCID: st944 | Date: 10/21/2025
+                // Start new thread for each client
+                new Thread(() -> handleClient(client, clientId)).start();
             }
         } catch (IOException e) {
             System.out.println("Exception from start()");
             e.printStackTrace();
         } finally {
             System.out.println("closing server socket");
+        }
+    }
+
+    /**
+     * UCID: st944 | Date: 10/21/2025
+     * Handles private message logic
+     */
+    private void handlePrivateMessage(int senderId, String[] parts) {
+        try {
+            int targetId = Integer.parseInt(parts[1]);
+            String message = String.join(" ", java.util.Arrays.copyOfRange(parts, 2, parts.length));
+            PrintWriter targetOut = clients.get(targetId);
+            PrintWriter senderOut = clients.get(senderId);
+
+            if (targetOut != null) {
+                String formatted = "Server: PM from Client#" + senderId + ": " + message;
+                targetOut.println(formatted);
+                senderOut.println(formatted);
+                System.out.println(formatted);
+            } else {
+                senderOut.println("Server: Client#" + targetId + " not found.");
+            }
+        } catch (Exception e) {
+            clients.get(senderId).println("Server: Invalid PM format. Use /pm <targetId> <message>");
+        }
+    }
+
+    private void handleClient(Socket client, int clientId) {
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()))) {
+            String fromClient;
+            while ((fromClient = in.readLine()) != null) {
+                System.out.println("Client#" + clientId + ": " + fromClient);
+
+                if (fromClient.startsWith("/pm ")) {
+                    handlePrivateMessage(clientId, fromClient.split(" "));
+                } else if ("/kill server".equalsIgnoreCase(fromClient)) {
+                    System.out.println("Server shutting down by command.");
+                    System.exit(0);
+                } else {
+                    // echo default
+                    clients.get(clientId).println("Server echo: " + fromClient);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Client#" + clientId + " disconnected.");
+        } finally {
+            clients.remove(clientId);
         }
     }
 
@@ -61,8 +100,7 @@ public class Server {
         try {
             port = Integer.parseInt(args[0]);
         } catch (Exception e) {
-            // can ignore, will either be index out of bounds or type mismatch
-            // will default to the defined value prior to the try/catch
+            // default
         }
         server.start(port);
         System.out.println("Server Stopped");
