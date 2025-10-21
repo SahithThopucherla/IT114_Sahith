@@ -1,5 +1,9 @@
 package M4.Part3;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Utility to attempt to provide colored text in the terminal.
  * <p>
@@ -16,6 +20,19 @@ public abstract class TextFX {
      * chatroom projects.
      * </p>
      */
+    // UCID: st944 | Date: 10/21/2025
+    
+    public static String shuffleText(String input) {
+        List<Character> chars = input.chars()
+                                    .mapToObj(c -> (char) c)
+                                    .collect(Collectors.toList());
+        Collections.shuffle(chars);
+        StringBuilder sb = new StringBuilder();
+        chars.forEach(sb::append);
+        return sb.toString();
+    }
+
+
     public enum Color {
         BLACK("\033[0;30m"),
         RED("\033[0;31m"),
