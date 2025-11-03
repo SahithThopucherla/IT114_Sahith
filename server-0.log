@@ -1,0 +1,10 @@
+11/03/2025 16:42:55 [Project.Server.Server] ([32mINFO[0m):
+> Server Starting
+11/03/2025 16:42:55 [Project.Server.Server] ([32mINFO[0m):
+> [0;33mServer: Listening on port 3000[0m
+11/03/2025 16:42:55 [Project.Server.Room] ([32mINFO[0m):
+> [0;35mRoom[lobby]: Created[0m
+11/03/2025 16:42:55 [Project.Server.Server] ([32mINFO[0m):
+> [0;33mServer: Created new Room lobby[0m
+11/03/2025 16:42:55 [Project.Server.Server] ([32mINFO[0m):
+> [0;33mServer: Waiting for next client[0m

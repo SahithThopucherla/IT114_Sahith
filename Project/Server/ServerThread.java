@@ -1,17 +1,20 @@
 package Project.Server;
 
 import java.net.Socket;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
-import M5.Part5.TextFX.Color;
+import Project.Common.TextFX.Color;
 import Project.Common.ConnectionPayload;
 import Project.Common.Constants;
+import Project.Common.LoggerUtil;
 import Project.Common.Payload;
 import Project.Common.PayloadType;
+import Project.Common.Phase;
+import Project.Common.ReadyPayload;
 import Project.Common.RoomAction;
+import Project.Common.RoomResultPayload;
 import Project.Common.TextFX;
-import Project.Server.Server.BaseServerThread;
-import Project.Server.Server.Room;
 
 /**
  * A server-side representation of a single client
@@ -25,8 +28,10 @@ public class ServerThread extends BaseServerThread {
      * 
      * @param message
      */
+    @Override
     protected void info(String message) {
-        System.out.println(TextFX.colorize(String.format("Thread[%s]: %s", this.getClientId(), message), Color.CYAN));
+        LoggerUtil.INSTANCE
+                .info(TextFX.colorize(String.format("Thread[%s]: %s", this.getClientId(), message), Color.CYAN));
     }
 
     /**
@@ -50,6 +55,67 @@ public class ServerThread extends BaseServerThread {
     }
 
     // Start Send*() Methods
+    public boolean sendResetTurnStatus() {
+        ReadyPayload rp = new ReadyPayload();
+        rp.setPayloadType(PayloadType.RESET_TURN);
+        return sendToClient(rp);
+    }
+
+    public boolean sendTurnStatus(long clientId, boolean didTakeTurn) {
+        return sendTurnStatus(clientId, didTakeTurn, false);
+    }
+
+    public boolean sendTurnStatus(long clientId, boolean didTakeTurn, boolean quiet) {
+        // NOTE for now using ReadyPayload as it has the necessary properties
+        // An actual turn may include other data for your project
+        ReadyPayload rp = new ReadyPayload();
+        rp.setPayloadType(quiet ? PayloadType.SYNC_TURN : PayloadType.TURN);
+        rp.setClientId(clientId);
+        rp.setReady(didTakeTurn);
+        return sendToClient(rp);
+    }
+
+    public boolean sendCurrentPhase(Phase phase) {
+        Payload p = new Payload();
+        p.setPayloadType(PayloadType.PHASE);
+        p.setMessage(phase.name());
+        return sendToClient(p);
+    }
+
+    public boolean sendResetReady() {
+        ReadyPayload rp = new ReadyPayload();
+        rp.setPayloadType(PayloadType.RESET_READY);
+        return sendToClient(rp);
+    }
+
+    public boolean sendReadyStatus(long clientId, boolean isReady) {
+        return sendReadyStatus(clientId, isReady, false);
+    }
+
+    /**
+     * Sync ready status of client id
+     * 
+     * @param clientId who
+     * @param isReady  ready or not
+     * @param quiet    silently mark ready
+     * @return
+     */
+    public boolean sendReadyStatus(long clientId, boolean isReady, boolean quiet) {
+        ReadyPayload rp = new ReadyPayload();
+        rp.setClientId(clientId);
+        rp.setReady(isReady);
+        if (quiet) {
+            rp.setPayloadType(PayloadType.SYNC_READY);
+        }
+        return sendToClient(rp);
+    }
+
+    public boolean sendRooms(List<String> rooms) {
+        RoomResultPayload rrp = new RoomResultPayload();
+        rrp.setRooms(rooms);
+        return sendToClient(rrp);
+    }
+
     protected boolean sendDisconnect(long clientId) {
         Payload payload = new Payload();
         payload.setClientId(clientId);
@@ -121,13 +187,15 @@ public class ServerThread extends BaseServerThread {
     /**
      * Sends a message to the client
      * 
+     * @param clientId who it's from
      * @param message
      * @return true for successful send
      */
-    protected boolean sendMessage(String message) {
+    protected boolean sendMessage(long clientId, String message) {
         Payload payload = new Payload();
         payload.setPayloadType(PayloadType.MESSAGE);
         payload.setMessage(message);
+        payload.setClientId(clientId);
         return sendToClient(payload);
     }
 
@@ -138,7 +206,7 @@ public class ServerThread extends BaseServerThread {
         switch (incoming.getPayloadType()) {
             case CLIENT_CONNECT:
                 setClientName(((ConnectionPayload) incoming).getClientName().trim());
-               
+
                 break;
             case DISCONNECT:
                 currentRoom.handleDisconnect(this);
@@ -158,10 +226,58 @@ public class ServerThread extends BaseServerThread {
             case ROOM_LEAVE:
                 currentRoom.handleJoinRoom(this, Room.LOBBY);
                 break;
+            case ROOM_LIST:
+                currentRoom.handleListRooms(this, incoming.getMessage());
+                break;
+            case READY:
+                // no data needed as the intent will be used as the trigger
+                try {
+                    // cast to GameRoom as the subclass will handle all Game logic
+                    ((GameRoom) currentRoom).handleReady(this);
+                } catch (Exception e) {
+                    sendMessage(Constants.DEFAULT_CLIENT_ID, "You must be in a GameRoom to do the ready check");
+                }
+                break;
+            case TURN:
+                // no data needed as the intent will be used as the trigger
+                try {
+                    // cast to GameRoom as the subclass will handle all Game logic
+                    ((GameRoom) currentRoom).handleTurnAction(this, incoming.getMessage());
+                } catch (Exception e) {
+                    sendMessage(Constants.DEFAULT_CLIENT_ID, "You must be in a GameRoom to do a turn");
+                }
+                break;
+            //st944 10-30-25
+            //routes PICK payload to active Gameroom
+            case PICK:
+                try {
+                    ((GameRoom) currentRoom).handlePick(this, incoming.getMessage());
+                }
+                catch (Exception e) {
+                    sendMessage(Constants.DEFAULT_CLIENT_ID, "You must be in a Gameroom to pick.");
+                }
+                break;
             default:
-                System.out.println(TextFX.colorize("Unknown payload type received", Color.RED));
+                LoggerUtil.INSTANCE.warning(TextFX.colorize("Unknown payload type received", Color.RED));
                 break;
         }
+    }
+
+    // limited user data exposer
+    protected boolean isReady() {
+        return this.user.isReady();
+    }
+
+    protected void setReady(boolean isReady) {
+        this.user.setReady(isReady);
+    }
+
+    protected boolean didTakeTurn() {
+        return this.user.didTakeTurn();
+    }
+
+    protected void setTookTurn(boolean tookTurn) {
+        this.user.setTookTurn(tookTurn);
     }
 
     @Override
