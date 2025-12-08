@@ -258,3 +258,195 @@
 > [0;32mConnected[0m
 11/24/2025 22:43:40 [Project.Client.Client] ([32mINFO[0m):
 > [0;34mRoom[lobby] You joined the room[0m
+11/24/2025 22:48:30 [Project.Client.Client] ([32mINFO[0m):
+> Client Created
+11/24/2025 22:48:30 [Project.Client.Client] ([32mINFO[0m):
+> Client starting
+11/24/2025 22:48:30 [Project.Client.Client] ([32mINFO[0m):
+> Waiting for input
+11/24/2025 22:48:38 [Project.Client.Client] ([32mINFO[0m):
+> Client Created
+11/24/2025 22:48:38 [Project.Client.Client] ([32mINFO[0m):
+> Client starting
+11/24/2025 22:48:38 [Project.Client.Client] ([32mINFO[0m):
+> Waiting for input
+11/24/2025 22:48:56 [Project.Client.Client] ([32mINFO[0m):
+> Client Created
+11/24/2025 22:48:56 [Project.Client.Client] ([32mINFO[0m):
+> Client starting
+11/24/2025 22:48:56 [Project.Client.Client] ([32mINFO[0m):
+> Waiting for input
+11/24/2025 22:50:14 [Project.Client.Client] ([32mINFO[0m):
+> [0;33mName set to Alice[0m
+11/24/2025 22:50:14 [Project.Client.Client] ([32mINFO[0m):
+> [0;36mKnown clients:[0m
+11/24/2025 22:50:14 [Project.Client.Client] ([32mINFO[0m):
+> [0;36mKnown clients:
+[0m
+11/24/2025 22:50:14 [Project.Client.Client] ([32mINFO[0m):
+> [0;36mKnown clients:
+[0m
+11/24/2025 22:50:19 [Project.Client.Client] ([32mINFO[0m):
+> Client connected
+11/24/2025 22:50:19 [Project.Client.Client] ([32mINFO[0m):
+> [0;32mConnected[0m
+11/24/2025 22:50:19 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[lobby] You joined the room[0m
+11/24/2025 22:50:24 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom game doesn't exist[0m
+11/24/2025 22:53:03 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom game create doesn't exist[0m
+11/24/2025 22:54:14 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[lobby] You left the room[0m
+11/24/2025 22:54:14 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game] You joined the room[0m
+11/24/2025 22:56:56 [Project.Client.Client] ([32mINFO[0m):
+> Client Created
+11/24/2025 22:56:56 [Project.Client.Client] ([32mINFO[0m):
+> Client starting
+11/24/2025 22:56:56 [Project.Client.Client] ([32mINFO[0m):
+> Waiting for input
+11/24/2025 22:58:04 [Project.Client.Client] ([32mINFO[0m):
+> [0;33mName set to Alice[0m
+11/24/2025 22:58:04 [Project.Client.Client] ([32mINFO[0m):
+> [0;36mKnown clients:[0m
+11/24/2025 22:58:04 [Project.Client.Client] ([32mINFO[0m):
+> [0;36mKnown clients:
+[0m
+11/24/2025 22:58:04 [Project.Client.Client] ([32mINFO[0m):
+> [0;36mKnown clients:
+[0m
+11/24/2025 22:58:08 [Project.Client.Client] ([32mINFO[0m):
+> Client connected
+11/24/2025 22:58:08 [Project.Client.Client] ([32mINFO[0m):
+> [0;32mConnected[0m
+11/24/2025 22:58:08 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[lobby] You joined the room[0m
+11/24/2025 22:58:13 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[lobby] You left the room[0m
+11/24/2025 22:58:13 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game] You joined the room[0m
+11/24/2025 22:58:17 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game] You left the room[0m
+11/24/2025 22:58:17 [Project.Client.Client] ([33mWARNING[0m):
+> Connection dropped
+11/24/2025 22:58:17 [Project.Client.Client] ([32mINFO[0m):
+> Closing output stream
+11/24/2025 22:58:17 [Project.Client.Client] ([32mINFO[0m):
+> Closing input stream
+11/24/2025 22:58:17 [Project.Client.Client] ([32mINFO[0m):
+> Closing connection
+11/24/2025 22:58:17 [Project.Client.Client] ([32mINFO[0m):
+> Closed Socket
+11/24/2025 22:58:17 [Project.Client.Client] ([32mINFO[0m):
+> listenToServer thread stopped
+11/24/2025 22:58:58 [Project.Client.Client] ([33mWARNING[0m):
+> Not connected to server (hint: type `/connect host:port` without the quotes and replace host/port with the necessary info)
+11/24/2025 22:59:05 [Project.Client.Client] ([32mINFO[0m):
+> Client connected
+11/24/2025 22:59:05 [Project.Client.Client] ([33mWARNING[0m):
+> [0;33mClient ID already set, this shouldn't happen[0m
+11/24/2025 22:59:05 [Project.Client.Client] ([32mINFO[0m):
+> [0;32mConnected[0m
+11/24/2025 22:59:05 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[lobby] You joined the room[0m
+11/24/2025 22:59:12 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[lobby] You left the room[0m
+11/24/2025 22:59:12 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game] You joined the room[0m
+11/24/2025 22:59:30 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game] Bob#2 joined the room[0m
+11/24/2025 22:59:51 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game] Carol#4 joined the room[0m
+11/24/2025 23:00:11 [Project.Client.Client] ([32mINFO[0m):
+> [0;32mYou picked: r[0m
+11/24/2025 23:00:11 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mCurrent phase is READY, please try again later[0m
+11/24/2025 23:00:11 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mYou can't pick right now.[0m
+11/24/2025 23:00:49 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: Round 1 has started[0m
+11/24/2025 23:00:49 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: It's Carol#4's turn[0m
+11/24/2025 23:01:08 [Project.Client.Client] ([32mINFO[0m):
+> Carol#4 took their turn
+11/24/2025 23:01:19 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: It's Bob#2's turn[0m
+11/24/2025 23:01:27 [Project.Client.Client] ([32mINFO[0m):
+> Bob#2 took their turn
+11/24/2025 23:01:49 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: It's Alice#3's turn[0m
+11/24/2025 23:02:01 [Project.Client.Client] ([32mINFO[0m):
+> [0;32mYou picked: s[0m
+11/24/2025 23:02:01 [Project.Client.Client] ([32mINFO[0m):
+> Alice#3 took their turn
+11/24/2025 23:02:01 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: All players have taken their turn (3/3) ending the round[0m
+11/24/2025 23:02:01 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: It's a tie. No winner.[0m
+11/24/2025 23:02:01 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: Round 2 has started[0m
+11/24/2025 23:02:01 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: It's Carol#4's turn[0m
+11/24/2025 23:02:31 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: It's Bob#2's turn[0m
+11/24/2025 23:03:01 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: It's Alice#3's turn[0m
+11/24/2025 23:03:31 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: Round 3 has started[0m
+11/24/2025 23:03:31 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: It's Carol#4's turn[0m
+11/24/2025 23:04:01 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: It's Bob#2's turn[0m
+11/24/2025 23:04:31 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: It's Alice#3's turn[0m
+12/08/2025 00:03:02 [Project.Client.Client] ([32mINFO[0m):
+> Client Created
+12/08/2025 00:03:02 [Project.Client.Client] ([32mINFO[0m):
+> Client starting
+12/08/2025 00:03:02 [Project.Client.Client] ([32mINFO[0m):
+> Waiting for input
+12/08/2025 00:03:19 [Project.Client.Client] ([32mINFO[0m):
+> Client Created
+12/08/2025 00:03:19 [Project.Client.Client] ([32mINFO[0m):
+> Client starting
+12/08/2025 00:03:19 [Project.Client.Client] ([32mINFO[0m):
+> Waiting for input
+12/08/2025 00:06:57 [Project.Client.Client] ([32mINFO[0m):
+> [0;33mName set to Carol[0m
+12/08/2025 00:06:57 [Project.Client.Client] ([32mINFO[0m):
+> [0;36mKnown clients:[0m
+12/08/2025 00:06:57 [Project.Client.Client] ([32mINFO[0m):
+> [0;36mKnown clients:
+[0m
+12/08/2025 00:06:57 [Project.Client.Client] ([32mINFO[0m):
+> [0;36mKnown clients:
+[0m
+12/08/2025 00:07:03 [Project.Client.Client] ([32mINFO[0m):
+> Client connected
+12/08/2025 00:07:03 [Project.Client.Client] ([32mINFO[0m):
+> [0;32mConnected[0m
+12/08/2025 00:07:03 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[lobby] You joined the room[0m
+12/08/2025 00:07:16 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[lobby] You left the room[0m
+12/08/2025 00:07:16 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game] You joined the room[0m
+12/08/2025 00:07:23 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game] Bob#2 joined the room[0m
+12/08/2025 00:07:27 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game] Alice#1 left the room[0m
+12/08/2025 00:07:27 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game] Alice#1 joined the room[0m
+12/08/2025 00:54:37 [Project.Client.Client] ([32mINFO[0m):
+> [0;34mRoom[game]: Alice#1 disconnected[0m
+12/08/2025 01:01:26 [Project.Client.Client] ([32mINFO[0m):
+> Client Created
+12/08/2025 01:01:48 [Project.Client.Client] ([32mINFO[0m):
+> Client Created
+12/08/2025 01:02:00 [Project.Client.Client] ([32mINFO[0m):
+> Client Created
+12/08/2025 14:27:14 [Project.Client.Client] ([32mINFO[0m):
+> Client Created
+12/08/2025 14:28:52 [Project.Client.Client] ([32mINFO[0m):
+> Client Created
